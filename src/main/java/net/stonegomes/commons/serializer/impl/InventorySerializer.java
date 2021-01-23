@@ -33,7 +33,6 @@ public class InventorySerializer implements Serializer<String, Inventory> {
         return deserialize(key, null, 9 * 5);
     }
 
-
     public Inventory deserialize(String key, String name, int size) {
         Inventory inventory = Bukkit.createInventory(null, size, name);
         if (key.equals("empty")) return inventory;
