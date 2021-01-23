@@ -9,8 +9,6 @@ public abstract class CommonsPlugin extends JavaPlugin {
     public void onEnable() { ModuleManager.load(); }
 
     @Override
-    public void onDisable() {
-        ModuleManager.unload();
-    }
+    public void onDisable() { ModuleManager.unload(); }
 
 }
