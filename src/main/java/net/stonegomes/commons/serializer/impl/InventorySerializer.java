@@ -15,21 +15,17 @@ public class InventorySerializer implements Serializer<String, Inventory> {
 
     @Override
     public String serialize(Inventory value) {
-        try {
-            if (value.getContents().length == 0) return "empty";
+        if (value.getContents().length == 0) return "empty";
 
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < value.getSize(); i++) {
-                ItemStack itemStack = value.getItem(i);
-                if (itemStack == null) continue;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < value.getSize(); i++) {
+            ItemStack itemStack = value.getItem(i);
+            if (itemStack == null) continue;
 
-                stringBuilder.append(i + ":" + itemStackSerializer.serialize(itemStack)).append(i != value.getSize() ? ";" : "");
-            }
-
-            return stringBuilder.toString();
-        } catch (Exception exception) {
-            return null;
+            stringBuilder.append(i + ":" + itemStackSerializer.serialize(itemStack)).append(i != value.getSize() ? ";" : "");
         }
+
+        return stringBuilder.toString();
     }
 
     @Override
