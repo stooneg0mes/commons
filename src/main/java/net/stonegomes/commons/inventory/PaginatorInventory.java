@@ -9,9 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-@Getter
 public abstract class PaginatorInventory {
 
+    @Getter
     private int currentPage = 0;
 
     private final Map<Integer, ClickableItem> fixedItems = new HashMap<>();
