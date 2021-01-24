@@ -48,7 +48,7 @@ public abstract class PaginatorInventory {
     Fixed items
      */
 
-    public void addFixedItem(int slot, ClickableItem clickableItem) {
+    public void setFixedItem(int slot, ClickableItem clickableItem) {
         fixedItems.put(slot, clickableItem);
 
         CustomInventory customInventory = pages.get(currentPage);

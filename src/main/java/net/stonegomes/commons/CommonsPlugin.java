@@ -1,6 +1,8 @@
 package net.stonegomes.commons;
 
+import net.stonegomes.commons.inventory.listener.InventoryClickListener;
 import net.stonegomes.commons.module.ModuleManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CommonsPlugin extends JavaPlugin {
@@ -8,6 +10,11 @@ public class CommonsPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         enable();
+
+        /*
+        Registering inventory listener
+         */
+        Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
 
         /*
         Loading modules
