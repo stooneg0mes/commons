@@ -1,6 +1,5 @@
 package net.stonegomes.commons.module;
 
-import net.stonegomes.commons.module.annotation.Module;
 import net.stonegomes.commons.module.annotation.cycle.Disable;
 import net.stonegomes.commons.module.annotation.cycle.Enable;
 
@@ -21,6 +20,8 @@ public class ModuleManager {
     }
 
     private static void invokeMethodsByAnnotation(Class<? extends Annotation> annotationClass, Class[] classes) {
+        if (classes == null) return;
+
         for (Class<?> clazz : classes) {
             Set<Method> filteredMethods = Arrays.stream(clazz.getDeclaredMethods())
                 .filter(method -> method.isAnnotationPresent(annotationClass))

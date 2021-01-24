@@ -3,6 +3,7 @@ package net.stonegomes.commons.inventory.item.itemstack;
 import com.google.common.collect.Lists;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -25,8 +26,8 @@ public class ItemStackBuilder {
         this.itemMeta = itemStack.getItemMeta();
     }
 
-    public ItemStackBuilder name(String name) {
-        itemMeta.setDisplayName(name);
+    public ItemStackBuilder name(String name, boolean translateCode) {
+        itemMeta.setDisplayName(translateCode ? name.replace("&", "§") : name);
         itemStack.setItemMeta(itemMeta);
 
         return this;
@@ -39,7 +40,9 @@ public class ItemStackBuilder {
         return this;
     }
 
-    public ItemStackBuilder lore(List<String> lore) {
+    public ItemStackBuilder lore(List<String> lore, boolean translateCode) {
+        if (translateCode) lore.replaceAll(string -> string.replace("&", "§"));
+
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 
@@ -78,6 +81,14 @@ public class ItemStackBuilder {
 
     public ItemStackBuilder amount(int amount) {
         itemStack.setAmount(amount);
+
+        return this;
+    }
+
+    public ItemStackBuilder glow() {
+        itemStack.addEnchantment(Enchantment.DIG_SPEED, 1);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        itemStack.setItemMeta(itemMeta);
 
         return this;
     }
