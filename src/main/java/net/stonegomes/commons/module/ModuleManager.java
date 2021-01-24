@@ -3,7 +3,6 @@ package net.stonegomes.commons.module;
 import net.stonegomes.commons.module.annotation.Module;
 import net.stonegomes.commons.module.annotation.cycle.Disable;
 import net.stonegomes.commons.module.annotation.cycle.Enable;
-import org.reflections8.Reflections;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -13,18 +12,16 @@ import java.util.stream.Collectors;
 
 public class ModuleManager {
 
-    private static final Reflections REFLECTIONS = new Reflections();
-
-    public static void load() {
-        invokeMethodsByAnnotation(Enable.class);
+    public static void load(Class[] classes) {
+        invokeMethodsByAnnotation(Enable.class, classes);
     }
 
-    public static void unload() {
-        invokeMethodsByAnnotation(Disable.class);
+    public static void unload(Class[] classes) {
+        invokeMethodsByAnnotation(Disable.class, classes);
     }
 
-    private static void invokeMethodsByAnnotation(Class<? extends Annotation> annotationClass) {
-        for (Class<?> clazz : REFLECTIONS.getTypesAnnotatedWith(Module.class)) {
+    private static void invokeMethodsByAnnotation(Class<? extends Annotation> annotationClass, Class[] classes) {
+        for (Class<?> clazz : classes) {
             Set<Method> filteredMethods = Arrays.stream(clazz.getDeclaredMethods())
                 .filter(method -> method.isAnnotationPresent(annotationClass))
                 .collect(Collectors.toSet());
