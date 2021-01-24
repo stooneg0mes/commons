@@ -10,12 +10,12 @@ public class Replacer {
 
     private Map<String, String> replaceElements = new HashMap<>();
 
-    public Replacer(String key, String value) {
+    public Replacer(String key, Object value) {
         addElement(key, value);
     }
 
-    public Replacer addElement(String key, String value) {
-        replaceElements.put(key, value);
+    public Replacer addElement(String key, Object value) {
+        replaceElements.put(key, value.toString());
 
         return this;
     }
