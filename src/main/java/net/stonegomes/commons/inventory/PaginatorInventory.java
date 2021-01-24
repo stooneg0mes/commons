@@ -2,65 +2,69 @@ package net.stonegomes.commons.inventory;
 
 import lombok.Getter;
 import net.stonegomes.commons.inventory.item.ClickableItem;
-import net.stonegomes.commons.inventory.item.itemstack.ItemStackBuilder;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 @Getter
-public class PaginatorInventory {
+public abstract class PaginatorInventory {
 
-    private int currentPage;
-    private final List<CustomInventory> pages;
+    private int currentPage = 0;
 
-    public PaginatorInventory(List<ClickableItem> items, String title) {
-        currentPage = 0;
-        pages = new LinkedList<>();
+    private final Map<Integer, ClickableItem> fixedItems = new HashMap<>();
+    private final List<CustomInventory> pages = new LinkedList<>();
 
-        CustomInventory inventory = new DefaultPaginatorInventory(title, this);
-
-        Integer[] ALLOWED_SLOTS = new Integer[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34};
-        int i = 0;
-
-        /*
-        In case the provided items is empty
-         */
-
-        if (items.isEmpty()) {
-            inventory.setItem(22, ClickableItem.builder()
-                .itemStack(new ItemStackBuilder(Material.COBWEB).name("§cInventário vázio").build())
-                .build());
-
-            pages.add(inventory);
-            return;
-        }
+    public PaginatorInventory() {
+        CustomInventory inventory = new EmptyCustomInventory(getTitle(), getRows(), true);
 
         /*
         Filling the inventory & adding pages
          */
 
-        for (ClickableItem clickableItem : items) {
-            if (ALLOWED_SLOTS[i] == 34) {
-                inventory.setItem(ALLOWED_SLOTS[i], clickableItem);
+        int i = 0;
+        for (ClickableItem clickableItem : getItems()) {
+            if (fixedItems.containsKey(getAllowedSlots()[i])) continue;
+
+            int allowedSlotsLength = getAllowedSlots().length;
+            if (getAllowedSlots()[i] == getAllowedSlots()[allowedSlotsLength - 1]) {
+                inventory.setItem(getAllowedSlots()[i], clickableItem);
 
                 i = 0;
-                inventory = new DefaultPaginatorInventory(title, this);
+                inventory = new EmptyCustomInventory(getTitle(), getRows(), true);
                 continue;
             }
 
-            inventory.setItem(ALLOWED_SLOTS[i], clickableItem);
+            inventory.setItem(getAllowedSlots()[i], clickableItem);
             if (i == 0) pages.add(inventory);
 
             i++;
         }
     }
 
-    public void open(Player player) {
+    /*
+    Fixed items
+     */
+
+    public void addFixedItem(int slot, ClickableItem clickableItem) {
+        fixedItems.put(slot, clickableItem);
+
+        CustomInventory customInventory = pages.get(currentPage);
+        customInventory.setItem(slot, clickableItem);
+    }
+
+    /*
+    Pages
+     */
+
+    public void openFirstPage(Player player) {
         if (pages.size() == 0) return;
 
         CustomInventory customInventory = pages.get(currentPage);
+
+        init(customInventory);
         customInventory.openInventory(player);
     }
 
@@ -69,6 +73,8 @@ public class PaginatorInventory {
         currentPage++;
 
         CustomInventory customInventory = pages.get(currentPage);
+
+        init(customInventory);
         customInventory.openInventory(player);
     }
 
@@ -77,11 +83,23 @@ public class PaginatorInventory {
         currentPage--;
 
         CustomInventory customInventory = pages.get(currentPage);
+
+        init(customInventory);
         customInventory.openInventory(player);
     }
 
-    public CustomInventory getPage(int index) {
-        return pages.get(index);
-    }
+    /*
+    Abstract methods
+     */
+
+    public abstract void init(CustomInventory customInventory);
+
+    public abstract String getTitle();
+
+    public abstract List<ClickableItem> getItems();
+
+    public abstract Integer[] getAllowedSlots();
+
+    public abstract int getRows();
 
 }
