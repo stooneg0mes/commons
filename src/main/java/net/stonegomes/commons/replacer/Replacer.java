@@ -1,6 +1,7 @@
 package net.stonegomes.commons.replacer;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static java.util.Map.Entry;
@@ -25,6 +26,14 @@ public class Replacer {
         }
 
         return string;
+    }
+
+    public List<String> apply(List<String> list) {
+        for (Entry<String, String> replaceElement : replaceElements.entrySet()) {
+            list.replaceAll(string -> string.replace(replaceElement.getKey(), replaceElement.getValue()));
+        }
+
+        return list;
     }
 
 }
