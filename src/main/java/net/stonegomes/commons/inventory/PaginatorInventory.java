@@ -64,7 +64,7 @@ public abstract class PaginatorInventory {
 
         CustomInventory customInventory = pages.get(currentPage);
 
-        init(customInventory);
+        init(customInventory, player);
         customInventory.openInventory(player);
     }
 
@@ -74,7 +74,7 @@ public abstract class PaginatorInventory {
 
         CustomInventory customInventory = pages.get(currentPage);
 
-        init(customInventory);
+        init(customInventory, player);
         customInventory.openInventory(player);
     }
 
@@ -84,7 +84,7 @@ public abstract class PaginatorInventory {
 
         CustomInventory customInventory = pages.get(currentPage);
 
-        init(customInventory);
+        init(customInventory, player);
         customInventory.openInventory(player);
     }
 
@@ -92,7 +92,7 @@ public abstract class PaginatorInventory {
     Abstract methods
      */
 
-    public abstract void init(CustomInventory customInventory);
+    public abstract void init(CustomInventory customInventory, Player player);
 
     public abstract String getTitle();
 
