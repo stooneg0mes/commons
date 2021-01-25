@@ -86,8 +86,9 @@ public class ItemStackBuilder {
     }
 
     public ItemStackBuilder glow() {
-        itemStack.addUnsafeEnchantment(Enchantment.DIG_SPEED, 1);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        itemMeta.addEnchant(Enchantment.THORNS, 1, true);
+        
         itemStack.setItemMeta(itemMeta);
 
         return this;
