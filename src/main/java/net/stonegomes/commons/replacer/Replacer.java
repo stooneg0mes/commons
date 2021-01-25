@@ -8,9 +8,10 @@ import static java.util.Map.Entry;
 
 public class Replacer {
 
-    private Map<String, String> replaceElements = new HashMap<>();
+    private Map<String, String> replaceElements;
 
     public Replacer(String key, Object value) {
+        replaceElements = new HashMap<>();
         addElement(key, value);
     }
 
@@ -22,7 +23,7 @@ public class Replacer {
 
     public String apply(String string) {
         for (Entry<String, String> replaceElement : replaceElements.entrySet()) {
-            string.replace(replaceElement.getKey(), replaceElement.getValue());
+            string = string.replace(replaceElement.getKey(), replaceElement.getValue());
         }
 
         return string;
