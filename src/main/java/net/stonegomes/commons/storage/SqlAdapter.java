@@ -9,8 +9,8 @@ public interface SqlAdapter<T> {
 
     T read(ResultSet resultSet) throws SQLException;
 
-    Query getReplaceQuery(T value);
+    Query buildReplaceQuery(T value);
 
-    Query getDeleteQuery(Object object);
+    Query buildDeleteQuery(Object object);
 
 }
