@@ -30,7 +30,7 @@ public class InventorySerializer implements Serializer<String, Inventory> {
 
     @Override
     public Inventory deserialize(String key) {
-        return deserialize(key, null, 9 * 5);
+        return deserialize(key, "Default inventory", 9 * 5);
     }
 
     public Inventory deserialize(String key, String name, int size) {
