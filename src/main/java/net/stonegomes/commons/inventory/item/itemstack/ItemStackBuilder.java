@@ -26,6 +26,10 @@ public class ItemStackBuilder {
         this.itemMeta = itemStack.getItemMeta();
     }
 
+    public ItemStackBuilder name(String name) {
+        return name(name, false);
+    }
+
     public ItemStackBuilder name(String name, boolean translateCode) {
         itemMeta.setDisplayName(translateCode ? name.replace("&", "§") : name);
         itemStack.setItemMeta(itemMeta);
