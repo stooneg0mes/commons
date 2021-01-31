@@ -2,6 +2,7 @@ package net.stonegomes.commons.storage.impl;
 
 import net.stonegomes.commons.storage.SqlCredentials;
 import net.stonegomes.commons.storage.SqlStorage;
+import org.bukkit.Bukkit;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class SQLiteStorage extends SqlStorage {
             sqlCredentials.getTableCreation().accept(this);
             return true;
         } catch (ClassNotFoundException | SQLException exception) {
+            Bukkit.getConsoleSender().sendMessage("Something bad happened on sqlite connection: " + exception.getMessage());
             return false;
         }
     }

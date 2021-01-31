@@ -2,6 +2,7 @@ package net.stonegomes.commons.storage.impl;
 
 import net.stonegomes.commons.storage.SqlCredentials;
 import net.stonegomes.commons.storage.SqlStorage;
+import org.bukkit.Bukkit;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,7 +21,7 @@ public class MySQLStorage extends SqlStorage {
             sqlCredentials.getTableCreation().accept(this);
             return true;
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            Bukkit.getConsoleSender().sendMessage("Something bad happened on mysql connection: " + exception.getMessage());
             return false;
         }
     }

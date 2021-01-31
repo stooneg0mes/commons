@@ -88,7 +88,7 @@ public class ItemStackBuilder {
     public ItemStackBuilder glow() {
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemMeta.addEnchant(Enchantment.THORNS, 1, true);
-        
+
         itemStack.setItemMeta(itemMeta);
 
         return this;
