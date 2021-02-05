@@ -25,7 +25,7 @@ public class LocationSerializer implements Serializer<String, Location> {
         World world = Bukkit.getWorld(splitKey[0]);
         if (world == null) return null;
 
-        return world.getBlockAt(Integer.parseInt(splitKey[1]), Integer.parseInt(splitKey[2]), Integer.parseInt(splitKey[3])).getLocation();
+        return new Location(world, Double.parseDouble(splitKey[1]), Double.parseDouble(splitKey[2]), Double.parseDouble(splitKey[3]));
     }
 
 }
