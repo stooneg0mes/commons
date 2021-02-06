@@ -15,7 +15,7 @@ public class LocationSerializer implements Serializer<String, Location> {
     public String serialize(Location value) {
         if (value.getWorld() == null) return null;
 
-        return value.getWorld().getName() + ";" + value.getX() + ";" + value.getY() + ";" + value.getZ();
+        return value.getWorld().getName() + ";" + value.getX() + ";" + value.getY() + ";" + value.getZ() + ";" + value.getYaw() + ";" + value.getPitch();
     }
 
     @Override
@@ -25,7 +25,13 @@ public class LocationSerializer implements Serializer<String, Location> {
         World world = Bukkit.getWorld(splitKey[0]);
         if (world == null) return null;
 
-        return new Location(world, Double.parseDouble(splitKey[1]), Double.parseDouble(splitKey[2]), Double.parseDouble(splitKey[3]));
+        return new Location(world,
+            Double.parseDouble(splitKey[1]),
+            Double.parseDouble(splitKey[2]),
+            Double.parseDouble(splitKey[3]),
+            Float.parseFloat(splitKey[4]),
+            Float.parseFloat(splitKey[5])
+        );
     }
 
 }
