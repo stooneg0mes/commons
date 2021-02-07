@@ -13,13 +13,15 @@ public class LocationSerializer implements Serializer<String, Location> {
 
     @Override
     public String serialize(Location value) {
-        if (value.getWorld() == null) return null;
+        if (value == null || value.getWorld() == null) return "Empty";
 
         return value.getWorld().getName() + ";" + value.getX() + ";" + value.getY() + ";" + value.getZ() + ";" + value.getYaw() + ";" + value.getPitch();
     }
 
     @Override
     public Location deserialize(String key) {
+        if (key.equals("Empty")) return null;
+
         String[] splitKey = key.split(";");
 
         World world = Bukkit.getWorld(splitKey[0]);

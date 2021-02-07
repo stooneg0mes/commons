@@ -15,15 +15,16 @@ public class InventorySerializer implements Serializer<String, Inventory> {
 
     @Override
     public String serialize(Inventory value) {
-        if (value.getContents().length == 0) return "empty";
-
         StringBuilder stringBuilder = new StringBuilder();
+
         for (int i = 0; i < value.getSize(); i++) {
             ItemStack itemStack = value.getItem(i);
             if (itemStack == null) continue;
 
             stringBuilder.append(i + ":" + itemStackSerializer.serialize(itemStack)).append(i != value.getSize() ? ";" : "");
         }
+
+        if (stringBuilder.toString().isEmpty()) stringBuilder.append("Empty");
 
         return stringBuilder.toString();
     }
@@ -35,7 +36,7 @@ public class InventorySerializer implements Serializer<String, Inventory> {
 
     public Inventory deserialize(String key, String name, int size) {
         Inventory inventory = Bukkit.createInventory(null, size, name);
-        if (key.equals("empty")) return inventory;
+        if (key.equals("Empty")) return inventory;
 
         for (String string : key.split(";")) {
             String[] splitString = string.split(":");
