@@ -8,14 +8,13 @@ import static java.util.Map.Entry;
 
 public class Replacer {
 
-    private Map<String, String> replaceElements;
+    private final Map<String, String> replaceElements = new HashMap<>();
 
     public Replacer(String key, Object value) {
-        replaceElements = new HashMap<>();
-        addElement(key, value);
+        replaceElements.put(key, value.toString());
     }
 
-    public Replacer addElement(String key, Object value) {
+    public Replacer addReplace(String key, Object value) {
         replaceElements.put(key, value.toString());
 
         return this;

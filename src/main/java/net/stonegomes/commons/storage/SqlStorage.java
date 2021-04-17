@@ -13,7 +13,7 @@ import java.sql.SQLException;
 @Getter
 public abstract class SqlStorage {
 
-    public ResultSet prepare(Query query) {
+    public ResultSet executeQuery(Query query) {
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query.getQueryContent());
 

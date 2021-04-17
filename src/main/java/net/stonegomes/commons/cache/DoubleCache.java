@@ -69,6 +69,8 @@ public class DoubleCache<K, V> {
         return elements.isEmpty();
     }
 
-    public Set<Map.Entry<K, V>> getEntries() { return elements.entrySet(); }
+    public Set<Map.Entry<K, V>> getEntries() {
+        return elements.entrySet();
+    }
 
 }

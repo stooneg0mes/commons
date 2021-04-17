@@ -3,7 +3,9 @@ package net.stonegomes.commons.cache;
 import com.google.common.collect.ImmutableSet;
 import lombok.Getter;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public class SingleCache<T> {
@@ -15,7 +17,9 @@ public class SingleCache<T> {
         return elements.contains(key);
     }
 
-    public void addElement(T value) { elements.add(value); }
+    public void addElement(T value) {
+        elements.add(value);
+    }
 
     public T find(Predicate<T> predicate) {
         for (T value : elements) {
@@ -23,10 +27,6 @@ public class SingleCache<T> {
         }
 
         return null;
-    }
-
-    public Collection<T> getElements() {
-        return elements;
     }
 
     public Set<T> toImmutable() {

@@ -1,45 +1,57 @@
 package net.stonegomes.commons;
 
-import net.stonegomes.commons.module.ModuleManager;
+import net.stonegomes.commons.module.Module;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Arrays;
 
 public class CommonsPlugin extends JavaPlugin {
 
     @Override
-    public void onEnable() {
-        enable();
+    public void onLoad() {
+        handleLoad();
 
         /*
         Loading modules
          */
-        ModuleManager.load(getModuleClasses());
+
+        Arrays.stream(getModules()).forEach(Module::handleLoad);
     }
 
     @Override
-    public void onLoad() {
-        load();
+    public void onEnable() {
+        handleEnable();
+
+        /*
+        Enabling modules
+         */
+
+        Arrays.stream(getModules()).forEach(Module::handleEnable);
     }
 
     @Override
     public void onDisable() {
-        disable();
+        handleDisable();
 
         /*
-        Unloading modules
+        Disabling modules
          */
-        ModuleManager.unload(getModuleClasses());
+
+        Arrays.stream(getModules()).forEach(Module::handleDisable);
     }
 
     /*
     Abstract methods
      */
 
-    public void enable() { };
+    public void handleEnable() { }
 
-    public void load() { };
+    public void handleLoad() { }
 
-    public void disable() { };
+    public void handleDisable() { }
 
-    public Class[] getModuleClasses() { return null; }
+    public Module[] getModules() {
+        return new Module[0];
+    }
 
 }
