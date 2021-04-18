@@ -1,7 +1,34 @@
 # commons
 A commons to help in plugin development.
 
-## Storage examples
+## Installation
+
+### Gradle
+```
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.stooneg0mes:commons:-16e417d408-1'
+}
+```
+
+### Maven
+```
+<repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+</repository>
+
+<dependency>
+    <groupId>com.github.stooneg0mes</groupId>
+    <artifactId>commons</artifactId>
+    <version>-16e417d408-1</version>
+</dependency>
+```
+
+## Examples
 
 ### Making a MySQL connection
 ```
@@ -26,9 +53,9 @@ Query deleteUserQuery = Query.builder()
 sqlStorage.executeQuery(deleteUserQuery);
 ```
 
-## Module examples
+### Module examples
 
-### Module example
+#### Module example
 ```
 public class UserModule extends Module {
 
@@ -47,7 +74,7 @@ public class UserModule extends Module {
 }
 ```
 
-### Main class example (registering modules)
+#### Main class example (registering modules)
 ```
 public class MyPlugin extends CommonsPlugin {
 
