@@ -12,25 +12,6 @@ import java.util.UUID;
 
 public class CommonsPlugin extends JavaPlugin {
 
-    private void a() {
-        SqlCredentials sqlCredentials = SqlCredentials.builder()
-            .user("root")
-            .database("test")
-            .password("")
-            .host("localhost")
-            .build();
-
-        SqlStorage sqlStorage = new MySQLStorage();
-        sqlStorage.startConnection(sqlCredentials);
-
-        Query deleteUserQuery = Query.builder()
-            .query("DELETE FROM users WHERE UUID = ?")
-            .values(UUID.randomUUID())
-            .build();
-
-        sqlStorage.executeQuery(deleteUserQuery);
-    }
-
     @Override
     public void onLoad() {
         handleLoad();
