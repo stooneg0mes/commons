@@ -2,11 +2,11 @@ package net.stonegomes.commons.storage.query;
 
 public class QueryBuilder {
 
-    private String queryContent;
+    private String query;
     private Object[] values;
 
-    public QueryBuilder queryContent(String queryContent) {
-        this.queryContent = queryContent;
+    public QueryBuilder query(String query) {
+        this.query = query;
         return this;
     }
 
@@ -16,7 +16,7 @@ public class QueryBuilder {
     }
 
     public Query build() {
-        return new Query(queryContent, values);
+        return new Query(query, values);
     }
 
 }

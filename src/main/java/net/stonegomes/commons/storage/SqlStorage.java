@@ -34,7 +34,7 @@ public abstract class SqlStorage {
 
     public abstract boolean startConnection(SqlCredentials sqlCredentials);
 
-    public abstract boolean isConnected();
+    public abstract boolean hasConnection();
 
     public abstract Connection getConnection();
 
