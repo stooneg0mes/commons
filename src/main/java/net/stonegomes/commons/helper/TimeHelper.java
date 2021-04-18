@@ -32,10 +32,10 @@ public class TimeHelper {
         return time;
     }
 
-    public String formatTime(long time, boolean comparedDifference) {
+    public String formatTime(long time, boolean compareDifference) {
         if (time == -1) return "n/a";
 
-        long realTime = (comparedDifference ? time - System.currentTimeMillis() : time);
+        long realTime = (compareDifference ? time - System.currentTimeMillis() : time);
 
         if (realTime == 0L) {
             return "nunca";
