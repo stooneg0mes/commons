@@ -40,7 +40,7 @@ public class SQLiteStorage extends SqlStorage {
     }
 
     @Override
-    public boolean isConnected() {
+    public boolean hasConnection() {
         return connection != null;
     }
 
@@ -48,4 +48,5 @@ public class SQLiteStorage extends SqlStorage {
     public Connection getConnection() {
         return connection;
     }
+
 }

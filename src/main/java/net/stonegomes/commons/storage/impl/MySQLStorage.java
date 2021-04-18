@@ -28,7 +28,7 @@ public class MySQLStorage extends SqlStorage {
 
 
     @Override
-    public boolean isConnected() {
+    public boolean hasConnection() {
         return connection != null;
     }
 
