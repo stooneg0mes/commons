@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.stooneg0mes:commons:-16e417d408-1'
+    implementation 'com.github.stooneg0mes:commons:1.0'
 }
 ```
 
@@ -24,7 +24,7 @@ dependencies {
 <dependency>
     <groupId>com.github.stooneg0mes</groupId>
     <artifactId>commons</artifactId>
-    <version>-16e417d408-1</version>
+    <version>1.0</version>
 </dependency>
 ```
 
