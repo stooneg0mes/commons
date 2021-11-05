@@ -16,33 +16,27 @@ public class CommonsPlugin extends JavaPlugin {
     public void onLoad() {
         handleLoad();
 
-        /*
-        Loading modules
-         */
-
         Arrays.stream(getModules()).forEach(Module::handleLoad);
+
+        handlePostLoad();
     }
 
     @Override
     public void onEnable() {
         handleEnable();
 
-        /*
-        Enabling modules
-         */
-
         Arrays.stream(getModules()).forEach(Module::handleEnable);
+
+        handlePostEnable();
     }
 
     @Override
     public void onDisable() {
         handleDisable();
 
-        /*
-        Disabling modules
-         */
-
         Arrays.stream(getModules()).forEach(Module::handleDisable);
+
+        handlePostDisable();
     }
 
     /*
@@ -54,6 +48,16 @@ public class CommonsPlugin extends JavaPlugin {
     public void handleLoad() { }
 
     public void handleDisable() { }
+
+    /*
+    Post abstract methods
+     */
+
+    public void handlePostEnable() { }
+
+    public void handlePostLoad() { }
+
+    public void handlePostDisable() { }
 
     public Module[] getModules() {
         return new Module[0];

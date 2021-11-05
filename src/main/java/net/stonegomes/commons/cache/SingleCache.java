@@ -21,6 +21,10 @@ public class SingleCache<T> {
         elements.add(value);
     }
 
+    public void removeElement(T value) {
+        elements.remove(value);
+    }
+
     public T find(Predicate<T> predicate) {
         for (T value : elements) {
             if (predicate.test(value)) return value;
