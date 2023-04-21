@@ -1,21 +1,22 @@
 # commons
 A commons to help in plugin development.
+Discontinued and not used project, public archive for those who wants to use or had this used through JitPack. But I will not be maintaining this anymore.
 
 ## Installation
 
 ### Gradle
-```
+```groovy
 repositories {
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'com.github.stooneg0mes:commons:1.1'
+    implementation 'com.github.stooneg0mes:commons:<TAG>'
 }
 ```
 
 ### Maven
-```
+```xml
 <repository>
     <id>jitpack.io</id>
     <url>https://jitpack.io</url>
@@ -24,65 +25,65 @@ dependencies {
 <dependency>
     <groupId>com.github.stooneg0mes</groupId>
     <artifactId>commons</artifactId>
-    <version>1.1</version>
+    <version><TAG></version>
 </dependency>
 ```
 
 ## Examples
 
 ### Making a MySQL connection
-```
-SqlCredentials sqlCredentials = SqlCredentials.builder()
-        .user("root")
-        .database("test")
-        .password("")
-        .host("localhost")
-        .build();
+```java
+SqlCredentials storageCredentials = SqlCredentials.builder()
+    .user("root")
+    .database("test")
+    .password("")
+    .host("localhost")
+    .build();
 
-SqlStorage sqlStorage = new MySQLStorage();
-sqlStorage.startConnection(sqlCredentials);
+SqlStorage storage = new MySQLStorage();
+storage.startConnection(storageCredentials);
 ```
 
 ### Making a query
-```
+```java
 Query deleteUserQuery = Query.builder()
-        .query("DELETE FROM users WHERE UUID = ?")
-        .values(UUID.randomUUID())
-        .build();
+    .query("DELETE FROM users WHERE UUID = ?")
+    .values(UUID.randomUUID())
+    .build();
         
-sqlStorage.executeQuery(deleteUserQuery);
+storage.executeQuery(deleteUserQuery);
 ```
 
 ### Module examples
 
 #### Module example
-```
-public class UserModule extends Module {
+```java
+public class ProductModule extends Module {
 
-    private final UserCache userCache = ...
+    private final ProductManager userManager = ...
     
     @Override
     public void handleEnable() {
-        userCache.load();
+        productManager.load();
     }
 
     @Override
     public void handleDisable() {
-        userCache.save();
+        productManager.save();
     }
     
 }
 ```
 
 #### Main class example (registering modules)
-```
+```java
 public class MyPlugin extends CommonsPlugin {
 
     @Override
     public Module[] getModules() {
         return new Module[] {
-            new UserModule(),
-            new ProductModule()
+            new ProductModule(),
+            new UserModule()
         };
     }
     
