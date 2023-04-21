@@ -31,7 +31,20 @@ dependencies {
 
 ## Examples
 
-### Making a MySQL connection
+### Storage examples
+
+#### Connection
+##### Preparing a SQLite connection
+```java
+SqlCredentials storageCredentials = SqlCredentials.builder()
+    .parent(parentFile)
+    .fileName("storage")
+    .build();
+
+SqlStorage storage = new SQLiteStorage();
+```
+
+##### Preparing a MySQL connection
 ```java
 SqlCredentials storageCredentials = SqlCredentials.builder()
     .user("root")
@@ -41,10 +54,14 @@ SqlCredentials storageCredentials = SqlCredentials.builder()
     .build();
 
 SqlStorage storage = new MySQLStorage();
+```
+
+##### Establishing connection
+```java
 storage.startConnection(storageCredentials);
 ```
 
-### Making a query
+#### Making a query
 ```java
 Query deleteUserQuery = Query.builder()
     .query("DELETE FROM users WHERE UUID = ?")
